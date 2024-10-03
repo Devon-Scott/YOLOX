@@ -19,7 +19,7 @@ class Exp(BaseExp):
 
         # ---------------- model config ---------------- #
         # detect classes number of model
-        self.num_classes = 80
+        self.num_classes = 3
         # factor of model depth
         self.depth = 1.00
         # factor of model width
@@ -104,7 +104,7 @@ class Exp(BaseExp):
         self.test_size = (640, 640)
         # confidence threshold during evaluation/test,
         # boxes whose scores are less than test_conf will be filtered
-        self.test_conf = 0.01
+        self.test_conf = 0.2
         # nms threshold
         self.nmsthre = 0.65
 

@@ -134,8 +134,11 @@ class VOCDetection(CacheDataset):
 
         self.annotations = self._load_coco_annotations()
 
+        print("Number of images in {}: {:d}".format(dataset_name, self.num_imgs))
+        # Get info on self.ids
+        print("Length of self.ids: ", len(self.ids))
         path_filename = [
-            (self._imgpath % self.ids[i]).split(self.root + "/")[1]
+            (self._imgpath % self.ids[i]).split(os.path.join(self.root, ""))[1]
             for i in range(self.num_imgs)
         ]
         super().__init__(
@@ -278,7 +281,7 @@ class VOCDetection(CacheDataset):
     def _do_python_eval(self, output_dir="output", iou=0.5):
         rootpath = os.path.join(self.root, "VOC" + self._year)
         name = self.image_set[0][1]
-        annopath = os.path.join(rootpath, "Annotations", "{:s}.xml")
+        annopath = os.path.join(rootpath, "Annotations", "{}.xml")
         imagesetfile = os.path.join(rootpath, "ImageSets", "Main", name + ".txt")
         cachedir = os.path.join(
             self.root, "annotations_cache", "VOC" + self._year, name
