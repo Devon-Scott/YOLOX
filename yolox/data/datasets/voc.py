@@ -264,7 +264,8 @@ class VOCDetection(CacheDataset):
                 for im_ind, index in enumerate(self.ids):
                     index = index[1]
                     dets = all_boxes[cls_ind][im_ind]
-                    if dets == []:
+                    # if dets == []:
+                    if dets.size == 0:
                         continue
                     for k in range(dets.shape[0]):
                         f.write(
