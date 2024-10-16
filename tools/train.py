@@ -138,6 +138,7 @@ if __name__ == "__main__":
         exp.dataset = exp.get_dataset(cache=True, cache_type=args.cache)
 
     dist_url = "auto" if args.dist_url is None else args.dist_url
+    logger.info("Arguments: {}".format(args))
     launch(
         main,
         num_gpu,

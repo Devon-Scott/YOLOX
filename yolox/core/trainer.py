@@ -34,7 +34,7 @@ from yolox.utils import (
 )
 
 class EarlyStopping:
-    def __init__(self, patience=10, min_delta=0):
+    def __init__(self, patience=20, min_delta=0.1):
         self.patience = patience
         self.min_delta = min_delta
         self.best_loss = None
@@ -87,7 +87,7 @@ class Trainer:
             mode="a",
         )
 
-        self.stopper = EarlyStopping(patience=10, min_delta=0.01)
+        self.stopper = EarlyStopping(patience=20, min_delta=0.1)
         self.stopped = False
 
     def train(self):
@@ -128,10 +128,7 @@ class Trainer:
             outputs = self.model(inps, targets)
 
         loss = outputs["total_loss"]
-        if self.stopper.check(loss.item()):
-            self.stopped = True
-            logger.info("Early stopping at epoch {}.".format(self.epoch + 1))
-
+        
         self.optimizer.zero_grad()
         self.scaler.scale(loss).backward()
         self.scaler.step(self.optimizer)

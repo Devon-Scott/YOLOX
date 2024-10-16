@@ -19,6 +19,19 @@ from yolox.evaluators.voc_eval import voc_eval
 from .datasets_wrapper import CacheDataset, cache_read_img
 from .voc_classes import VOC_CLASSES
 
+OUTPUT_TXT =  os.path.join(
+                os.path.dirname(                            # 2024-Fall
+                os.path.dirname(                            # YOLOX 
+                os.path.dirname(                            # yolox
+                os.path.dirname(                            # data
+                os.path.dirname(__file__))))),              # datasets
+                "raw_output.txt") 
+
+def print_and_log(string):
+    assert os.path.exists(OUTPUT_TXT), f"Directory/File {OUTPUT_TXT} does not exist."
+    print(string)
+    with open(OUTPUT_TXT, "a") as file:
+        file.write(string + "\n")
 
 class AnnotationTransform(object):
 
@@ -240,8 +253,12 @@ class VOCDetection(CacheDataset):
             mAPs.append(mAP)
 
         print("--------------------------------------------------------------")
-        print("map_5095:", np.mean(mAPs))
-        print("map_50:", mAPs[0])
+        output = "map_5095: " + str(np.mean(mAPs))
+        print_and_log(output)
+        output = "map_50: " + str(mAPs[0])
+        print_and_log(output)
+        # print("map_5095:", np.mean(mAPs))
+        # print("map_50:", mAPs[0])
         print("--------------------------------------------------------------")
         return np.mean(mAPs), mAPs[0]
 
@@ -312,12 +329,12 @@ class VOCDetection(CacheDataset):
             )
             aps += [ap]
             if iou == 0.5:
-                print("AP for {} = {:.4f}".format(cls, ap))
+                print_and_log("AP for {} = {:.4f}".format(cls, ap))
             if output_dir is not None:
                 with open(os.path.join(output_dir, cls + "_pr.pkl"), "wb") as f:
                     pickle.dump({"rec": rec, "prec": prec, "ap": ap}, f)
         if iou == 0.5:
-            print("Mean AP = {:.4f}".format(np.mean(aps)))
+            print_and_log("Mean AP = {:.4f}".format(np.mean(aps)))
             print("~~~~~~~~")
             print("Results:")
             for ap in aps:
