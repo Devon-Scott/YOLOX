@@ -2,8 +2,8 @@
 
 # Define paths
 model="s"
-testFilePath="../../datasets/VOCDevkit/VOC2007/ImageSets/Main/test.txt"
-jpegImagesPath="../../datasets/VOCDevkit/VOC2007/JPEGImages"
+testFilePath="../../datasets/VOCDevkit/Tests/ImageSets/Main/test.txt"
+jpegImagesPath="../../datasets/VOCDevkit/Tests/JPEGImages"
 onnxModelPath="../../yolox_${model}.onnx"
 outputPath="../../ONNX_Outputs/yolox_${model}"
 inputShape="640,640"
@@ -11,12 +11,12 @@ scoreThreshold="0.3"
 
 # Check for model-specific paths and input shapes
 if [ "$model" == "nano" ]; then
-    jpegImagesPath="../../datasets/VOCDevkit/VOC2007_small/JPEGImages"
+    jpegImagesPath="../../datasets/VOCDevkit/Tests/JPEGImages_small"
     inputShape="416,416"
 fi
 
 # Change directory to YOLOX/demo/ONNXRuntime
-cd YOLOX/demo/ONNXRuntime || exit
+cd demo/ONNXRuntime || exit
 
 # Initialize variables for calculating average inference time
 total_time=0
@@ -54,4 +54,4 @@ else
 fi
 
 # Change back to the original directory
-cd ../../../
+cd ../../
