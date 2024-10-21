@@ -1,17 +1,18 @@
 #!/bin/bash
 
 # Define paths
+base_dir=$(pwd)  # Store the base directory path
 model="s"
-testFilePath="./datasets/VOCDevkit/Tests/ImageSets/Main/test.txt"
-jpegImagesPath="./datasets/VOCDevkit/Tests/JPEGImages"
-onnxModelPath="./yolox_${model}.onnx"
-outputPath="./ONNX_Outputs/yolox_${model}"
+testFilePath="$base_dir/datasets/VOCDevkit/Tests/ImageSets/Main/test.txt"
+jpegImagesPath="$base_dir/datasets/VOCDevkit/Tests/JPEGImages"
+onnxModelPath="$base_dir/yolox_${model}.onnx"
+outputPath="$base_dir/ONNX_Outputs/yolox_${model}"
 inputShape="640,640"
 scoreThreshold="0.3"
 
 # Check for model-specific paths and input shapes
 if [ "$model" == "nano" ]; then
-    jpegImagesPath="../../datasets/VOCDevkit/Tests/JPEGImages_small"
+    jpegImagesPath="$base_dir/datasets/VOCDevkit/Tests/JPEGImages_small"
     inputShape="416,416"
 fi
 
