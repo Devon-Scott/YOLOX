@@ -2,10 +2,10 @@
 
 # Define paths
 model="s"
-testFilePath="../../datasets/VOCDevkit/Tests/ImageSets/Main/test.txt"
-jpegImagesPath="../../datasets/VOCDevkit/Tests/JPEGImages"
-onnxModelPath="../../yolox_${model}.onnx"
-outputPath="../../ONNX_Outputs/yolox_${model}"
+testFilePath="./datasets/VOCDevkit/Tests/ImageSets/Main/test.txt"
+jpegImagesPath="./datasets/VOCDevkit/Tests/JPEGImages"
+onnxModelPath="./yolox_${model}.onnx"
+outputPath="./ONNX_Outputs/yolox_${model}"
 inputShape="640,640"
 scoreThreshold="0.3"
 
