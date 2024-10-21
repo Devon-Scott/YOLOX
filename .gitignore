@@ -3,9 +3,11 @@
 
 # user experiments directory
 YOLOX_outputs/
-datasets/
+datasets/VOCDevkit/*
+!datasets/VOCDevkit/Tests
 # do not ignore datasets under yolox/data
 !*yolox/data/datasets/
+ONNX_Outputs/
 
 # temporary files which can be created if a process still has a handle open of a deleted file
 .fuse_hidden*
@@ -227,4 +229,3 @@ events.out.tfevents*
 ehthumbs.db
 Thumbs.db
 
-VOCDevkit
