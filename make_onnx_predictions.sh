@@ -2,7 +2,7 @@
 
 # Define paths
 base_dir=$(pwd)  # Store the base directory path
-model="s"
+model=$1
 testFilePath="$base_dir/datasets/VOCdevkit/Tests/ImageSets/Main/test.txt"
 jpegImagesPath="$base_dir/datasets/VOCdevkit/Tests/JPEGImages"
 onnxModelPath="$base_dir/yolox_${model}.onnx"
