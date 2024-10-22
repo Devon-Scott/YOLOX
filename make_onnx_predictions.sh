@@ -34,6 +34,7 @@ while IFS= read -r line; do
         
         # Run the command and capture the output
         output=$(eval $command)
+        echo "$output"
         
         # Extract the inference time from the output
         if [[ $output =~ Model\ inference\ time:\ ([0-9]+\.[0-9]+)\ ms ]]; then
