@@ -2,7 +2,7 @@
 
 # Define paths
 base_dir=$(pwd)  # Store the base directory path
-model="s"
+model=$1  # Store the model type (nano or s)
 testFilePath="$base_dir/datasets/VOCdevkit/Tests/ImageSets/Main/test.txt"
 jpegImagesPath="$base_dir/datasets/VOCdevkit/Tests/JPEGImages"
 onnxModelPath="$base_dir/yolox_${model}.onnx"
@@ -14,6 +14,11 @@ scoreThreshold="0.3"
 if [ "$model" == "nano" ]; then
     jpegImagesPath="$base_dir/datasets/VOCdevkit/Tests/JPEGImages_small"
     inputShape="416,416"
+fi
+
+# Clear the output directory if it exists
+if [ -d "$outputPath" ]; then
+    rm -r "$outputPath"
 fi
 
 # Change directory to YOLOX/demo/ONNXRuntime
